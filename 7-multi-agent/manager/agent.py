@@ -4,6 +4,7 @@ from google.adk.tools.agent_tool import AgentTool
 from .sub_agents.funny_nerd.agent import funny_nerd
 from .sub_agents.news_analyst.agent import news_analyst
 from .sub_agents.stock_analyst.agent import stock_analyst
+from .tools.tools import get_current_time
 
 root_agent = Agent(
     name="manager",
@@ -21,9 +22,11 @@ root_agent = Agent(
 
     You also have access to the following tools:
     - news_analyst: Can search and analyze news articles
+    - get_current_time: Gets the current date and time
     """,
     sub_agents=[stock_analyst, funny_nerd],
     tools=[
         AgentTool(news_analyst),
+        get_current_time,
     ],
 )
