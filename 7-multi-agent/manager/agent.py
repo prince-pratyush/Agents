@@ -1,6 +1,8 @@
 from google.adk.agents import Agent
+from google.adk.tools.agent_tool import AgentTool
 
 from .sub_agents.funny_nerd.agent import funny_nerd
+from .sub_agents.news_analyst.agent import news_analyst
 from .sub_agents.stock_analyst.agent import stock_analyst
 
 root_agent = Agent(
@@ -16,6 +18,12 @@ root_agent = Agent(
     You are responsible for delegating tasks to the following agents:
     - stock_analyst: Can look up stock prices
     - funny_nerd: Tells nerdy jokes about programming, math, science, etc.
+
+    You also have access to the following tools:
+    - news_analyst: Can search and analyze news articles
     """,
     sub_agents=[stock_analyst, funny_nerd],
+    tools=[
+        AgentTool(news_analyst),
+    ],
 )
