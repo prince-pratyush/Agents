@@ -1,5 +1,6 @@
 from google.adk.agents import Agent
 
+from .sub_agents.funny_nerd.agent import funny_nerd
 from .sub_agents.stock_analyst.agent import stock_analyst
 
 root_agent = Agent(
@@ -12,8 +13,9 @@ root_agent = Agent(
     Always delegate the task to the appropriate agent. Use your best judgement 
     to determine which agent to delegate to.
 
-    You are responsible for delegating tasks to the following agent:
+    You are responsible for delegating tasks to the following agents:
     - stock_analyst: Can look up stock prices
+    - funny_nerd: Tells nerdy jokes about programming, math, science, etc.
     """,
-    sub_agents=[stock_analyst],
+    sub_agents=[stock_analyst, funny_nerd],
 )
