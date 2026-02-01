@@ -1,6 +1,7 @@
 from google.adk.agents import Agent
 
 from .sub_agents.policy_agent.agent import policy_agent
+from .sub_agents.sales_agent.agent import sales_agent
 
 # Create the root customer service agent
 customer_service_agent = Agent(
@@ -14,7 +15,7 @@ customer_service_agent = Agent(
     **Core Capabilities:**
 
     1. Query Understanding & Routing
-       - Understand user queries about policies
+       - Understand user queries about policies, course purchases
        - Direct users to the appropriate specialized agent
        - Maintain conversation context using state
 
@@ -44,9 +45,17 @@ customer_service_agent = Agent(
        - For questions about community guidelines, course policies, refunds
        - Direct policy-related queries here
 
+    2. Sales Agent
+       - For questions about purchasing the AI Marketing Platform course
+       - Handles course purchases and updates state
+       - Course price: $149
+
+    Tailor your responses based on the user's purchase history and previous interactions.
+    When the user hasn't purchased any courses yet, encourage them to explore the AI Marketing Platform.
+
     Always maintain a helpful and professional tone. If you're unsure which agent to delegate to,
     ask clarifying questions to better understand the user's needs.
     """,
-    sub_agents=[policy_agent],
+    sub_agents=[policy_agent, sales_agent],
     tools=[],
 )
