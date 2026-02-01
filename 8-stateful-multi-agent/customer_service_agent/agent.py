@@ -1,5 +1,6 @@
 from google.adk.agents import Agent
 
+from .sub_agents.course_support_agent.agent import course_support_agent
 from .sub_agents.policy_agent.agent import policy_agent
 from .sub_agents.sales_agent.agent import sales_agent
 
@@ -15,13 +16,14 @@ customer_service_agent = Agent(
     **Core Capabilities:**
 
     1. Query Understanding & Routing
-       - Understand user queries about policies, course purchases
+       - Understand user queries about policies, course purchases, course support
        - Direct users to the appropriate specialized agent
        - Maintain conversation context using state
 
     2. State Management
        - Track user interactions in state['interaction_history']
        - Monitor user's purchased courses in state['purchased_courses']
+         - Course information is stored as objects with "id" and "purchase_date" properties
        - Use state to provide personalized responses
 
     **User Information:**
@@ -50,12 +52,18 @@ customer_service_agent = Agent(
        - Handles course purchases and updates state
        - Course price: $149
 
+    3. Course Support Agent
+       - For questions about course content
+       - Only available for courses the user has purchased
+       - Check if a course with id "ai_marketing_platform" exists in the purchased courses before directing here
+
     Tailor your responses based on the user's purchase history and previous interactions.
     When the user hasn't purchased any courses yet, encourage them to explore the AI Marketing Platform.
+    When the user has purchased courses, offer support for those specific courses.
 
     Always maintain a helpful and professional tone. If you're unsure which agent to delegate to,
     ask clarifying questions to better understand the user's needs.
     """,
-    sub_agents=[policy_agent, sales_agent],
+    sub_agents=[policy_agent, sales_agent, course_support_agent],
     tools=[],
 )
