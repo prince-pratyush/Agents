@@ -9,9 +9,10 @@ pipeline for the overall flow.
 from google.adk.agents import ParallelAgent
 
 from .subagents.cpu_info_agent import cpu_info_agent
+from .subagents.memory_info_agent import memory_info_agent
 
 # --- 1. Create Parallel Agent to gather information concurrently ---
 root_agent = ParallelAgent(
     name="system_info_gatherer",
-    sub_agents=[cpu_info_agent],
+    sub_agents=[cpu_info_agent, memory_info_agent],
 )
